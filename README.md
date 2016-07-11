@@ -35,7 +35,7 @@ JDK_VERSION: 1.8.0_77 或更新版(程式碼內有使用JAVA 8語法，請務必
   final int DST = your_dst;
   ```
 
-- 最後結果會輸出於Result資料夾下，可做檔名輸入(若無輸入即為執行日期)
+- 最後結果會輸出於result資料夾下，可做檔名輸入(若無輸入即為執行日期)
 
   ```java
   OutputUtil outputUtil = new OutputUtil("your_file_name");
