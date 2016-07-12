@@ -35,13 +35,23 @@ JDK_VERSION: 1.8.0_77 或更新版(程式碼內有使用JAVA 8語法，請務必
   final int DST = your_dst;
   ```
 
-- 最後結果會輸出於result資料夾下，可做檔名輸入(若無輸入即為執行日期)
+- 最後結果會輸出於result資料夾下，可做檔名設定(若OutputUtil無參數即為預設為執行日期)
+
+  例如...
 
   ```java
   OutputUtil outputUtil = new OutputUtil("your_file_name");
   ```
 
-  以上設定成輸出成`今日日期_your_file_name.txt`
+  以上設定將輸出成`今日日期_your_file_name.txt`
+
+  而
+
+  ```java
+  OutputUtil outputUtil = new OutputUtil();
+  ```
+
+  以上設定將輸出成`今日日期.txt`
 
 ## 其他
   - 若有其他錯誤訊息會於Terminal中提示
