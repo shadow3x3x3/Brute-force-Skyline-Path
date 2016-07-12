@@ -4,6 +4,7 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
@@ -18,9 +19,12 @@ public class Graph {
     private ArrayList<Integer> nodes;
     private ArrayList<Edge> edges;
 
+    private ArrayList<ArrayList<Integer>> paths;
+
     public Graph() {
         nodes = new ArrayList<>();
         edges = new ArrayList<>();
+        paths = new ArrayList<>();
     }
 
     public void addNode(int node) {
@@ -54,9 +58,11 @@ public class Graph {
         HashMap<ArrayList, ArrayList> skylinePathWithAttrs = new HashMap<>();
         ArrayList<ArrayList<Float>> pathsAttrs = new ArrayList<>();
 
+        paths.clear();
+
         // Find All Path between src and dst
-        ArrayList<ArrayList<Integer>> paths =
-                enumerate(new Stack<>(), new HashSet<>(), src, dst, new ArrayList<>());
+        enumerate(src, dst, new LinkedHashSet<>());
+        System.out.println(paths);
 
         // calculate paths' attrs
         pathsAttrs.addAll(paths.stream().map(this::getAttrs).collect(Collectors.toList()));
@@ -72,21 +78,18 @@ public class Graph {
         return skylinePathWithAttrs;
     }
 
-    private ArrayList<ArrayList<Integer>> enumerate(Stack<Integer> path, HashSet<Integer> onPath,
-                                                    int src, int dst, ArrayList<ArrayList<Integer>> paths) {
-        path.push(src);
+    private void enumerate(int src, int dst, LinkedHashSet<Integer> onPath) {
         onPath.add(src);
-        if (src == dst) {
-            paths.add(new ArrayList<>(path));
-        } else {
-            getNeighbors(src).stream().filter(n -> !onPath.contains(n)).forEach(n -> {
-                enumerate(path, onPath, n, dst, paths);
-            });
-        }
 
-        path.pop();
+        if (src == dst) {
+            paths.add(new ArrayList<>(onPath));
+            onPath.remove(src);
+            return;
+        }
+        getNeighbors(src).stream().filter(n -> !onPath.contains(n)).forEach(n ->
+                enumerate(n, dst, onPath));
+
         onPath.remove(src);
-        return paths;
     }
 
     private ArrayList<Integer> getNeighbors(int node) {
