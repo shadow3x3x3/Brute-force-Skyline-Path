@@ -42,7 +42,7 @@ public class Graph {
             }
         } else {
             System.out.println("The same Edge(" + edge.src() + " - " + edge.dst() +
-                    ") has been added. But fine. It's just ignore. =)");
+                    ") has been added. But fine. It just be ignored. =)");
         }
     }
 
@@ -116,7 +116,6 @@ public class Graph {
         ArrayList<Float> attrs = new ArrayList<>();
 
         for (int i = 0; i < path.size() - 1; i++) {
-
             attrs = i == 0 ? getAttrs(path.get(i), path.get(i + 1)) :
                     aggregate(attrs, getAttrs(path.get(i), path.get(i + 1)));
         }
