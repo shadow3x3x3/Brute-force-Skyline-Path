@@ -80,7 +80,6 @@ public class Graph {
 
     private void enumerate(int src, int dst, LinkedHashSet<Integer> onPath) {
         onPath.add(src);
-
         if (src == dst) {
             paths.add(new ArrayList<>(onPath));
             onPath.remove(src);
