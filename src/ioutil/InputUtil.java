@@ -36,5 +36,4 @@ public class InputUtil {
         }
         return edge;
     }
-
 }

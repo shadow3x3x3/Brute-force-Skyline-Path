@@ -65,6 +65,4 @@ public class Skyline {
         }
         return SkylineDefinition.NON_DOMINATE;
     }
-
-
 }
